@@ -24,7 +24,7 @@ public class UserAPIController {
                                                      HttpSession session) {
         Map<String, Object> loginResult = userService.loginUser(user.getUserId(),user.getUserPassword());
         // 서비스에서 로그인한 결과를 무사히 가져왔다면
-        if("success".equals(loginResult)){
+        if("success".equals(loginResult.get("status"))){
             User loggedInUser = (User)loginResult.get("user");
             session.setAttribute("user", loggedInUser); // 로그인한 유저정보를 세션에 저장
             return ResponseEntity.ok(loginResult);
