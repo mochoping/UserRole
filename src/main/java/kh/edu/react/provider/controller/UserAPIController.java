@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -65,6 +66,11 @@ public class UserAPIController {
         } else {
             return ResponseEntity.status(404).body(Map.of("message", "로그인 상태가 아닙니다."));
         }
+    }
+
+    @GetMapping("/search")
+    public List<User> findUserByName(@RequestParam String userName) {
+        return userService.findUserByName(userName);
     }
 }
 

@@ -21,5 +21,12 @@
         AND user_password = #{userPassword}
     </select>
 
+    <!-- 유저 이름으로 검색-->
+    <select id="findUserByName">
+        SELECT *
+        FROM userrole
+        WHERE user_name =#{username}
+
+    </select>
 
 </mapper>
