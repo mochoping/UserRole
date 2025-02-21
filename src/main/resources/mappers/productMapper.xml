@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.edu.react.provider.mapper.ProductMapper">
+
+    <!-- 모든제품조회 "/api/products" -->
+    <select id='findAllProducts'>
+        SELECT product_name, product_category, product_price, product_stock, product_description
+
+        FROM product
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 상품명 또는 카테고리 조회 "/api/products/search?keyword=검색어"-->
+    <select id="searchProducts">
+        SELECT *
+        FROM product
+        WHERE product_name LIKE CONCAT('%',#{keyword},'%')
+        or product_category LIKE CONCAT('%',#{keyword},'%')
+
+    </select>
+
+    <!-- 제품 상세 조회 "/api/products/{productId}"-->
+    <select id="findProductById">
+        SELECT *
+        FROM product
+        WHERE product_id = #{productId}
+    </select>
+
+    <!-- 제품 저장  "/api/products"-->
+    <insert id="saveProduct">
+        INSERT INTO product (product_name, product_category, product_price, product_stock, product_description, product_image_url)
+        VALUES (
+                #{productName},
+                #{productCategory},
+                #{productPrice},
+                #{productStock},
+                #{productDescription},
+                #{productImageUrl}
+
+               )
+
+    </insert>
+
+
+
+
+
+</mapper>
