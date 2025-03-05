@@ -20,6 +20,7 @@ public class ClothesController {
         return clothesService.getAllClothes();
     }
 
+    // -parameters 문구가 에러로 뜨면 sql 컬럼명, dto명칭과 매개뵨수 명칭이 일피하는지 확인
     @GetMapping("/{id}")
     public Clothes getClothesById(@PathVariable int id) {
         return clothesService.getClothesById(id);
@@ -30,8 +31,9 @@ public class ClothesController {
         clothesService.insertClothes(clothes);
     }
 
-    @PutMapping
-    public void updateClothes(@RequestBody Clothes clothes) {
+    @PutMapping("/{id}")
+    public void updateClothes(@PathVariable int id ,@RequestBody Clothes clothes) {
+        clothes.setCId(id);
         clothesService.updateClothes(clothes);
     }
 
